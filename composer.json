@@ -1,0 +1,17 @@
+{
+    "name": "compressd/commentScraper",
+    "type": "application",
+    "description": "A simple PHP Comments Scraper",
+    "keywords": ["scraper, booking, tripadvisor"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matija Kovačević",
+            "email": "mata987@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "fabpot/goutte": "~2.0"
+    }
+}
