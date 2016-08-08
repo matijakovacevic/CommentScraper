@@ -67,7 +67,7 @@ class CommentScraper
                 'score'   => '.review_item_header_score_container',
                 'header'  => '.review_item_header_content',
                 'content' => '.review_item_review_content',
-                'date'    => '.review_item_header_date'
+                'date'    => '.review_item_date',
             )
         ),
         'tripadvisor' => array(
@@ -125,7 +125,8 @@ class CommentScraper
         } catch (Exception $e) {
             $file = $e->getFile();
             $line = $e->getLine();
-            echo 'Error crawling site! Message: '.$e->getMessage()." ($file:$line)";
+
+            die("Error crawling site '$site'! Message: ".$e->getMessage()." ($file:$line)");
         }
 
         if (empty($this->comments) || $forceRefresh === true) {
@@ -193,7 +194,8 @@ class CommentScraper
         } catch (Exception $e) {
             $file = $e->getFile();
             $line = $e->getLine();
-            echo 'Error crawling site! Message: '.$e->getMessage()." ($file:$line)";
+
+            die("Error crawling site '$site'! Message: ".$e->getMessage()." ($file:$line)");
         }
     }
 
@@ -313,6 +315,10 @@ class CommentScraper
      */
     private function parseBookingContent($elementNode, $key)
     {
+        if (is_null($elementNode->getNode(0))) {
+            return '';
+        }
+
         if ($key == 'content') {
             $val =  trim($elementNode->html());
             // remove blank lines + newline at the end of comment
